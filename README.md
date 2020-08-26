@@ -6,7 +6,7 @@
 
 Clear as mud, right? [Check here](what-is-apian) for a more complete overview.
 
----
+
 
 ## TLDR; I just want to build and run something...
 
@@ -14,7 +14,7 @@ While you can certainly build the Apian .NET support libraries, they don't *do* 
 
 Your best bet at the moment to visit the [Beam.Unity](https://github.com/Apian-Framework/Beam.Unity) and/or [Beam.Cli](https://github.com/Apian-Framework/Beam.Cli) repositories and follow the build instructions there.
 
----
+
 
 ## What *are* all of these repositories?
 
