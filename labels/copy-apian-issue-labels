@@ -1,4 +1,4 @@
-# /bin/sh
+#!/bin/bash
 # This script uses the GitHub Labels REST API
 # https://developer.github.com/v3/issues/labels/
 
@@ -20,15 +20,38 @@ TGT_GH_REPO=$2
 
 # ---------------------------------------------------------
 
+if [[ "$1" == "" || "$2" == "" ]]
+then
+    echo "usage: $0 <github-access-token> <apian-repository-name>"
+    exit
+fi
+
+if [[ $(command -v jq) == "" ]]
+then
+  echo "Error: jq is not installed.  'sudo apt-get install jq'"
+  exit
+fi
+
+
+# ---------------------------------------------------------
+
 # Headers used in curl commands
 GH_ACCEPT_HEADER="Accept: application/vnd.github.symmetra-preview+json"
 GH_AUTH_HEADER="Authorization: Bearer $GH_TOKEN"
 
 # Bash for-loop over JSON array with jq
 # https://starkandwayne.com/blog/bash-for-loop-over-json-array-using-jq/
-sourceLabelsJson64=$(curl --silent -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${SRC_GH_USER}/${SRC_GH_REPO}/labels | jq '[ .[] | { "name": .name, "color": .color, "description": .description } ]' | jq -r '.[] | @base64' )
 
-echo $TGT_GH_REPO
+fetchedJson=$(curl --silent -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${SRC_GH_USER}/${SRC_GH_REPO}/labels )
+errMsg=$(echo $fetchedJson | jq '.message' 2>/dev/null )
+if [[ $errMsg != "" ]]
+then
+    echo "Error: $errMsg"
+    exit
+fi
+sourceLabelsJson64=$( echo $fetchedJson | jq '[ .[] | { "name": .name, "color": .color, "description": .description } ]' | jq -r '.[] | @base64' )
+
+# sourceLabelsJson64=$(curl --silent -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${SRC_GH_USER}/${SRC_GH_REPO}/labels | jq '[ .[] | { "name": .name, "color": .color, "description": .description } ]' | jq -r '.[] | @base64' )
 
 # for each label from source repo,
 # invoke github api to create or update
@@ -43,16 +66,30 @@ for sourceLabelJson64 in $sourceLabelsJson64; do
     # https://developer.github.com/v3/issues/labels/#create-a-label
     createLabelResponse=$(echo $sourceLabelJson | curl --silent -X POST -d @- -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${TGT_GH_USER}/${TGT_GH_REPO}/labels)
 
+    #echo $createLabelResponse
+
+    # if there's an error then there will be a "message" field
+    errMsg=$(echo $createLabelResponse | jq -r '.message')
+    if [ "$errMsg" == "Not Found" ]
+    then
+        echo "Error: Apian repository $TGT_GH_REPO not found"
+        exit
+    fi
+
     # if creation failed then the response doesn't include an id and jq returns 'null'
+    # Actually, in this case errmsg is "Validation failed" with an "already_exists" error subfield
+    # TODO: make this better
     createdLabelId=$(echo $createLabelResponse | jq -r '.id')
 
     # if label wasn't created maybe it's because it already exists, try to update it
     if [ "$createdLabelId" == "null" ]
     then
         updateLabelResponse=$(echo $sourceLabelJson | curl --silent -X PATCH -d @- -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${TGT_GH_USER}/${TGT_GH_REPO}/labels/$(echo $sourceLabelJson | jq -r '.name | @uri'))
-        echo "Update label response:\n"$updateLabelResponse"\n"
+        #echo "Update label response:\n"$updateLabelResponse"\n"
+        echo "Updated label: $(echo $updateLabelResponse | jq '.name')"
     else
-        echo "Create label response:\n"$createLabelResponse"\n"
+        #echo "Create label response:\n"$createLabelResponse"\n"
+        echo "Created label: $(echo $createLabelResponse | jq '.name')"
     fi
 
 done

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Provide a personal access token that can
+# access the source and target repositories.
+# This is how you authorize with the GitHub API.
+# https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
+GH_TOKEN=$1
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+#
+if [[ "$1" == ""  ]]
+then
+    echo "usage: $0 <github-access-token>"
+    exit
+fi
+
+destApianRepos=("Apian.Net" "BeamGameCode" "Beam.Cli" "Beam.Unity" "P2pNet" "NotUnityEngine" "UniLog")
+
+for repo in "${destApianRepos[@]}"; do
+
+    echo Processing $repo...
+    $SCRIPT_DIR/copy-apian-issue-labels $GH_TOKEN $repo
+
+done
