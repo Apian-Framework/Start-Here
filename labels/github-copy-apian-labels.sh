@@ -1,4 +1,4 @@
-
+# /bin/sh
 # This script uses the GitHub Labels REST API
 # https://developer.github.com/v3/issues/labels/
 
@@ -6,7 +6,7 @@
 # access the source and target repositories.
 # This is how you authorize with the GitHub API.
 # https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
-GH_TOKEN=
+GH_TOKEN=$1
 
 # https://douglascayers.com/2019/08/01/how-to-export-and-import-github-issue-labels-between-projects
 
@@ -16,7 +16,7 @@ SRC_GH_REPO=Start-Here
 
 # The target repository to add or update labels.
 TGT_GH_USER=Apian-Framework
-TGT_GH_REPO=repo_name
+TGT_GH_REPO=$2
 
 # ---------------------------------------------------------
 
@@ -27,6 +27,8 @@ GH_AUTH_HEADER="Authorization: Bearer $GH_TOKEN"
 # Bash for-loop over JSON array with jq
 # https://starkandwayne.com/blog/bash-for-loop-over-json-array-using-jq/
 sourceLabelsJson64=$(curl --silent -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${SRC_GH_USER}/${SRC_GH_REPO}/labels | jq '[ .[] | { "name": .name, "color": .color, "description": .description } ]' | jq -r '.[] | @base64' )
+
+echo $TGT_GH_REPO
 
 # for each label from source repo,
 # invoke github api to create or update
