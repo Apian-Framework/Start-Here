@@ -8,7 +8,7 @@
 
 While Apian is in its current *very* early state of development it turns out that the most convenient way to use it is to check out the source code and build it along with any app you are working on. The example apps ( [Beam.Cli](), [Beam.Unity]() ) currently expect their repositories to be in the same folder as the other Apian repositories.
 
-To make this a little easier, there are 2 scripts that can automate this for you:
+To make this a little easier, there are 2 scripts in the same folder as this README file that can automate this for you:
 
 - `clone-apian-repos.bat` (for Windows)
 - `clone-apian-repos.sh` (Linux/MacOs)
