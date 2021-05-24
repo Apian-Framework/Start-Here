@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Fetch the name, color, and description fields for all of the issue labels in the given GitHub repository.
+# The idea is to save the fetched JSON and then upload it to any/all repos that you want to have the same issue labels.
+
+# This script uses the GitHub Labels REST API
+# https://developer.github.com/v3/issues/labels/
+
+# Provide a personal access token that can
+# access the source and target repositories.
+# This is how you authorize with the GitHub API.
+# https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
+GH_TOKEN=$1
+
+# https://douglascayers.com/2019/08/01/how-to-export-and-import-github-issue-labels-between-projects
+
+# The source GitHub organization.
+SRC_GH_USER=Apian-Framework
+
+# ---------------------------------------------------------
+
+if [[ "$1" == "" || "$2" == "" ]]
+then
+    echo "usage: $0 <github-access-token> <apian-repository-name>"
+    exit
+fi
+
+SRC_GH_REPO=$2
+
+if [[ $(command -v jq) == "" ]]
+then
+  echo "Error: jq is not installed.  'sudo apt-get install jq'"
+  exit
+fi
+
+
+# ---------------------------------------------------------
+
+# Headers used in curl commands
+GH_ACCEPT_HEADER="Accept: application/vnd.github.symmetra-preview+json"
+GH_AUTH_HEADER="Authorization: Bearer $GH_TOKEN"
+
+# Bash for-loop over JSON array with jq
+# https://starkandwayne.com/blog/bash-for-loop-over-json-array-using-jq/
+
+fetchedJson=$(curl --silent -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${SRC_GH_USER}/${SRC_GH_REPO}/labels )
+errMsg=$(echo $fetchedJson | jq '.message' 2>/dev/null )
+if [[ $errMsg != "" ]]
+then
+    echo "Error: $errMsg"
+    exit
+fi
+
+# filter out the name, color, and description fields
+extractedLabelJsonData=$( echo $fetchedJson | jq '[ .[] | { "name": .name, "color": .color, "description": .description } ]')
+
+echo $extractedLabelJsonData
+
+exit
+
+done

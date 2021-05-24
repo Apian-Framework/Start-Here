@@ -1,0 +1,14 @@
+[
+    { "name": "Type: Bug", "color": "e02020", "description": "Something isn't working" },
+    { "name": "Type: Documentation", "color": "0075ca", "description": "Improvements or additions to documentation" },
+    { "name": "Type: Feature", "color": "6fc6c5", "description": "New feature" },
+    { "name": "Type: Tech Debt", "color": "f7adb2", "description": "Servicing technical debt" },
+    
+    { "name": "Sys: Apian", "color": "c9c312", "description": "" },
+    { "name": "Sys: Beam", "color": "89ff7c", "description": "" },
+    { "name": "Sys: P2pNet", "color": "13AE11", "description": "" },
+    { "name": "Sys: Unity", "color": "9492f4", "description": "" },    
+    
+    { "name": "Pri: Critical",  "color": "ff0000", "description": "Gotta fix it" },
+    { "name": "Pri: Important", "color": "ff8000", "description": "Pretty important" }
+]

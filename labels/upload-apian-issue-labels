@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# This script fetches issue label data from the Apian "Start-Here" and copies it to the
+# This script uploads passed-in json issue label data  json string - from the Apian "Start-Here" and apllies it to the
 # provided repository.
 #
-# It's not really used anymore ( see "fetch-apian-issue-labels" and "update-all-apian-labels")
+# It's not really used anymore ( see "fetch-apian-issue-labels" and "update-apian-issue-labels")
 
 # This script uses the GitHub Labels REST API
 # https://developer.github.com/v3/issues/labels/
@@ -16,19 +16,20 @@ GH_TOKEN=$1
 
 # https://douglascayers.com/2019/08/01/how-to-export-and-import-github-issue-labels-between-projects
 
-# The source repository whose labels to copy.
+# The Github organization or repo-owner
 SRC_GH_USER=Apian-Framework
-SRC_GH_REPO=Start-Here
 
 # The target repository to add or update labels.
 TGT_GH_USER=Apian-Framework
 TGT_GH_REPO=$2
 
+JSON_FILE=$3
+
 # ---------------------------------------------------------
 
-if [[ "$1" == "" || "$2" == "" ]]
+if [[ "$1" == "" || "$2" == "" || "$3" == "" ]]
 then
-    echo "usage: $0 <github-access-token> <apian-repository-name>"
+    echo "usage: $0 <github-access-token> <apian-repository-name> <JSON data file>"
     exit
 fi
 
@@ -48,14 +49,7 @@ GH_AUTH_HEADER="Authorization: Bearer $GH_TOKEN"
 # Bash for-loop over JSON array with jq
 # https://starkandwayne.com/blog/bash-for-loop-over-json-array-using-jq/
 
-fetchedJson=$(curl --silent -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${SRC_GH_USER}/${SRC_GH_REPO}/labels )
-errMsg=$(echo $fetchedJson | jq '.message' 2>/dev/null )
-if [[ $errMsg != "" ]]
-then
-    echo "Error: $errMsg"
-    exit
-fi
-sourceLabelsJson64=$( echo $fetchedJson | jq '[ .[] | { "name": .name, "color": .color, "description": .description } ]' | jq -r '.[] | @base64' )
+sourceLabelsJson64=$( cat $JSON_FILE | jq -r '.[] | @base64' )
 
 # for each label from source repo,
 # invoke github api to create or update

@@ -8,6 +8,8 @@ GH_TOKEN=$1
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+JSON_FILE="${SCRIPT_DIR}/apian-issue-labels.json"
+
 #
 if [[ "$1" == ""  ]]
 then
@@ -15,11 +17,16 @@ then
     exit
 fi
 
-destApianRepos=("Apian.Net" "BeamGameCode" "Beam.Cli" "Beam.Unity" "P2pNet" "NotUnityEngine" "UniLog")
+echo $SCRIPT_DIR
+echo $JSON_FILE
+echo
+
+
+destApianRepos=("Ace" "Apian.Net" "Beam.Cli" "Beam.Unity" "BeamGameCode" "NotUnityEngine" "P2pNet" "Start-Here" "UniLog")
 
 for repo in "${destApianRepos[@]}"; do
 
     echo Processing $repo...
-    $SCRIPT_DIR/copy-apian-issue-labels $GH_TOKEN $repo
+    $SCRIPT_DIR/upload-apian-issue-labels $GH_TOKEN $repo $JSON_FILE
 
 done
