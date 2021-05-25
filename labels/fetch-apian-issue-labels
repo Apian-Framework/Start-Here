@@ -52,7 +52,8 @@ then
 fi
 
 # filter out the name, color, and description fields
-extractedLabelJsonData=$( echo $fetchedJson | jq '[ .[] | { "name": .name, "color": .color, "description": .description } ]')
+# note that it prepends a "#" to the color values so editors will recognize it as a CSS-style color. Needs to get taken of at load
+extractedLabelJsonData=$( echo $fetchedJson | jq '[ .[] | { "name": .name, "color": ("#"+.color), "description": .description } ]')
 
 echo $extractedLabelJsonData
 

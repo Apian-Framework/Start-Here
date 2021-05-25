@@ -49,7 +49,10 @@ GH_AUTH_HEADER="Authorization: Bearer $GH_TOKEN"
 # Bash for-loop over JSON array with jq
 # https://starkandwayne.com/blog/bash-for-loop-over-json-array-using-jq/
 
-sourceLabelsJson64=$( cat $JSON_FILE | jq -r '.[] | @base64' )
+# remove the leding hashes from the hex color values
+colorsStrippedOfHashes=$( cat $JSON_FILE | jq '[.[] | { "name": .name, "color": (.color|ltrimstr("#")), "description": .description }]' )
+
+sourceLabelsJson64=$( echo $colorsStrippedOfHashes | jq -r '.[] | @base64' )
 
 # for each label from source repo,
 # invoke github api to create or update
@@ -63,7 +66,6 @@ for sourceLabelJson64 in $sourceLabelsJson64; do
     # POST /repos/:owner/:repo/labels { name, color, description }
     # https://developer.github.com/v3/issues/labels/#create-a-label
     createLabelResponse=$(echo $sourceLabelJson | curl --silent -X POST -d @- -H "$GH_ACCEPT_HEADER" -H "$GH_AUTH_HEADER" https://api.github.com/repos/${TGT_GH_USER}/${TGT_GH_REPO}/labels)
-
     #echo $createLabelResponse
 
     # if there's an error then there will be a "message" field
