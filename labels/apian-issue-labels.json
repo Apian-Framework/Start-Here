@@ -4,6 +4,7 @@
     { "name": "Type: Feature", "color": "#6fc6c5", "description": "New feature" },
     { "name": "Type: Tech Debt", "color": "#f7adb2", "description": "Servicing technical debt" },
 
+    { "name": "Sys: Ace", "color": "#00FFFF", "description": "" },
     { "name": "Sys: Apian", "color": "#FFF700", "description": "" },
     { "name": "Sys: Beam", "color": "#7C85FF", "description": "" },
     { "name": "Sys: P2pNet", "color": "#FD99D4", "description": "" },
