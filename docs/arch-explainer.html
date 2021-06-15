@@ -253,15 +253,15 @@
         tLine.addLabel("stateChange");
         tLine.from("#qmark",   {duration: .5, scale: .1, autoAlpha: 0}, ">");
         tLine.from("#ap-core-arw", {duration: .5,  scale: .1, autoAlpha: 0, transformOrigin: "bottom", ease: "none"}, ">+.5");
-        tLine.set("#cmd1", {x: 120, y:460});
-        tLine.from("#cmd1",   {duration: .5, scale: .1, autoAlpha: 0}, ">");
+        tLine.set("#spark1", {x: 120, y:460});
+        tLine.from("#spark1",   {duration: .5, scale: .1, autoAlpha: 0}, ">");
         // SHould this be a func?
-        tLine.to("#cmd1", {x: 125, y:150, duration: 1}, "<");
+        tLine.to("#spark1", {x: 125, y:150, duration: 1}, "<");
         tLine.to("#ap-core-arw", {duration: .5,  scale: .1, autoAlpha: 0, transformOrigin: "top", ease: "none"}, ">+.5");
         tLine.add(coreWorkAnim());
         tLine.add(coreArrowAnim(), ">-.25")
         tLine.add(planeMove1(), "<+.25");
-        tLine.to("#cmd1", {duration: .5, autoAlpha: 0}, "<");
+        tLine.to("#spark1", {duration: .5, autoAlpha: 0}, "<");
         tLine.from("#nar9",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar9")});
 
         tLine.addLabel("aboutAppCore");
