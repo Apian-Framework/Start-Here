@@ -171,18 +171,23 @@ html {
 }
 
 #cloud-sm {
-    left: -335px;
-    top: 377px;
+    left: -305px;
+    top: 250px;
 }
 
 #cloud-zoom {
-    left: -120px;
-    top: 440px;
+    left: -72px;
+    top: 365px;
 }
 
 #cloud-flash {
     left: -170px;
     top: 440px;
+}
+
+#other-peers-sm {
+    left: -290px;
+    top: 140px;
 }
 
 #spark1 {
