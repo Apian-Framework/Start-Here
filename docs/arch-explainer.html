@@ -85,8 +85,8 @@
 
                 <div class="narrative line6" id="nar16">&nbsp;&nbsp; We're going to refer to the rest simply as the APPLICATION CODE.</div>
                 <div class="narrative line7" id="nar17">&#11041; It handles front-end tasks like rendering the CoreState for users.</div>
-                <div class="narrative line8" id="nar18">&#11041; As well as dispatching user input.</div>
-                <div class="narrative line8" id="nar19">&#11041; As well as dispatching user input - which is wrapped in a Command and sent to the AppCore.</div>
+                <div class="narrative line8" id="nar18">&#11041; As well as collecting user input.</div>
+                <div class="narrative line8" id="nar19">&#11041; As well as collecting user input - which then sent to the AppCore.</div>
 
                 <div class="narrative line6" id="nar20">As mentioned earlier, random behavior is not allowed in the AppCore.</div>
                 <div class="narrative line7" id="nar21">So any randomly acting code - like an AI - has to live in the Application Code.</div>
@@ -311,16 +311,11 @@
         tLine.addLabel("CommandFromApp");
         tLine.to("#nar18",  {duration: 1, autoAlpha: 0});
         tLine.from("#nar19",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar19")}, "<");
-        tLine.set("#cmd1", {x: 380, y: 520}, ">+1");
-        tLine.add(appWorkAnim());
-        tLine.fromTo("#cmd1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
 
         tLine.from("#app-core-arw", {duration: .5, autoAlpha: 0, scale: .1, transformOrigin: "bottom right"}, ">");
-        tLine.to("#cmd1", {x: 125, y:150, duration: 1}, ">");
         tLine.to("#spark1", {x: 125, y:150, duration: 1}, "<");
         tLine.to("#app-core-arw", {duration: .5, autoAlpha: 0, scale: .1, transformOrigin: "top left"}, ">");
         tLine.add(coreWorkAnim());
-        tLine.to("#cmd1", {duration: 1, autoAlpha: 0}, "<");
         tLine.add(coreArrowAnim(), ">-.25")
         tLine.add(planeMove1(), "<+.25");
         tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
@@ -339,20 +334,16 @@
 
         tLine.addLabel("startItWithAI");
         tLine.from("#nar22",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar22")});
-        //tLine.set("#cmd1", {x: 380, y: 520}, ">+1");
         tLine.add(inputFromAI());
-        tLine.add(appWorkAnim());
-        tLine.fromTo("#cmd1", {x: 380, y: 520, autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
+
 
         // Dup of above block
         // Need to fix the app-core-arrow
 
-        tLine.fromTo("#app-core-arw", {duration: .5, autoAlpha: 0, scale: .1},{autoAlpha: 1, scale: 1, transformOrigin: "bottom right"}, ">");
-        tLine.to("#cmd1", {x: 125, y:150, duration: 1}, ">");
-        tLine.to("#spark1", {x: 125, y:150, duration: 1}, "<");
+        tLine.fromTo("#app-core-arw", {duration: .5, autoAlpha: 0, scale: .1},{autoAlpha: 1, scale: 1, transformOrigin: "bottom right"}, ">+1");
+        tLine.to("#spark1", {x: 125, y:150, duration: 1}, ">");
         tLine.to("#app-core-arw", {duration: .5, autoAlpha: 0, scale: .1, transformOrigin: "top left"}, ">");
         tLine.add(coreWorkAnim());
-        tLine.to("#cmd1", {duration: 1, autoAlpha: 0}, "<");
         tLine.add(coreArrowAnim(), ">-.25")
         tLine.add(planeMove1(), "<+.25");
         tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
