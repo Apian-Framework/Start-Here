@@ -96,15 +96,16 @@
                 <div class="narrative line7" id="nar24">But that's not what we're trying to do.</div>
                 <div class="narrative line8" id="nar25">Which brings us to a new component: Apian</div>
 
-                <div class="narrative line6" id="nar26">Apian defines 3 types of wrapper messages:</div>
-                <div class="narrative line7" id="nar27">&nbsp;&nbsp;Commands - tell the AppCore to apply an application directive to the Core State.</div>
-                <div class="narrative line8" id="nar28">&nbsp;&nbsp;Requests from the Application Code *ask* that a directive be applied.</div>
-                <div class="narrative line9" id="nar29">&nbsp;&nbsp;Observations are similar to Requests, but originate from the AppCore itself.</div>
+                <div class="narrative line6" id="nar26">An Apian instance is paired with a local AppCore instance.</div>
+                <div class="narrative line7" id="nar27">One of its main jobs is to route messages to and from the AppCore.</div>
+                <div class="narrative line8" id="nar28">But the most important thing about it is that it is a proxy...</div>
+                <div class="narrative line9" id="nar29">...for an aggregate "Apian Group" object.</div>
 
-                <div class="narrative line6" id="nar30">An Apian instance is paired with an AppCore instance.</div>
-                <div class="narrative line7" id="nar31">(yes, that implies that there can be more than one Apian/AppCore pair)</div>
-                <div class="narrative line8" id="nar32">But the important thing about an Apian instance is that it is actually a proxy...</div>
-                <div class="narrative line9" id="nar33">...for an aggregate "Apian Collective" object.</div>
+                <div class="narrative line6" id="nar30">Apian defines 3 types of wrapper messages:</div>
+                <div class="narrative line7" id="nar31">&nbsp;&nbsp;Commands - tell the AppCore to apply an application directive to the Core State.</div>
+                <div class="narrative line8" id="nar32">&nbsp;&nbsp;Requests from the Application Code *ask* that a directive be applied.</div>
+                <div class="narrative line9" id="nar33">&nbsp;&nbsp;Observations are similar to Requests, but originate from the AppCore itself.</div>
+
 
                 <div class="narrative line8" id="narsorry">Sorry! This is as far as I've gotten for now...</div>
 
@@ -336,7 +337,6 @@
         tLine.from("#nar22",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar22")});
         tLine.add(inputFromAI());
 
-
         // Dup of above block
         // Need to fix the app-core-arrow
 
@@ -365,48 +365,46 @@
         tLine.to("#big-red-x", {duration: .5, autoAlpha: 0});
         tLine.from("#nar25",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar25")});
         tLine.from(["#apian"], {duration: 1, rotation: -360, scale: .1, autoAlpha: 0});
-        tLine.from("#apian-bkg", {duration: 1, autoAlpha: 0}, "<");
 
-        tLine.addLabel("apCommands");
+        tLine.addLabel("apianAppCorePair");
         tLine.to("#nar23",  {duration: .1, autoAlpha: 0});
         tLine.to("#nar24",  {duration: .1, autoAlpha: 0});
         tLine.to("#nar25",  {duration: .1, autoAlpha: 0});
-        tLine.from("#nar26",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar26")});
-        tLine.set("#cmd1", {x: -260, y: 705});
-        tLine.from("#nar27",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar27")}, ">+1");
-        tLine.to("#cmd1", {duration: 1, autoAlpha: 1}, "<");
-
-        tLine.addLabel("apRequests");
-        tLine.set("#req1", {x: -260, y: 755});
-        tLine.from("#nar28",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar28")});
-        tLine.to("#req1", {duration: 1, autoAlpha: 1}, "<");
-
-        tLine.addLabel("apObservations");
-        tLine.set("#obs1", {x: -260, y: 805});
-        tLine.from("#nar29",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar29")});
-        tLine.to("#obs1", {duration: 1, autoAlpha: 1}, "<");
-
-        tLine.addLabel("apianAppCorePair");
-        tLine.to(["#obs1", "#req1","#cmd1"], {duration: .1, autoAlpha: 0});
+        //tLine.from("#apian-bkg", {duration: 1, autoAlpha: 0}, "<");
         tLine.to(".narrative",  {duration: .1, autoAlpha: 0}, "<");
-        tLine.from("#nar30",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar30")}, ">");
-        tLine.from("#nar31",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar31")}, ">+1");
+        tLine.from("#nar26",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar26")}, ">");
+        tLine.fromTo("#apian-bkg", {autoAlpha: 0}, {duration: .25, repeat: 6, yoyo: true, ease: "step", autoAlpha: 1}, ">");
+        tLine.from("#nar27",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar27")}, ">");
 
         tLine.addLabel("apianIsAProxy");
-        tLine.from("#nar32",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar32")});
+        tLine.from("#nar28",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar28")});
 
         tLine.addLabel("forACollective");
         tLine.to("#cloud-sm", {duration: 1, autoAlpha: 1});
         tLine.to("#app-frame", {duration: 1, left: 260}, "<");
         tLine.to("#cloud-zoom", {duration: 1, autoAlpha: 1}, "<");
         tLine.fromTo("#cloud-flash", {autoAlpha: 0}, {duration: .5, repeat: 8, yoyo: true, ease: "step", autoAlpha: 1}, "<");
-        tLine.from("#nar33",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar33")}, ">");
+        tLine.from("#nar29",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar29")}, ">");
+
+        tLine.addLabel("apCommands");
+        tLine.from("#nar30",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar30")});
+        tLine.set("#cmd1", {x: -260, y: 705});
+        tLine.from("#nar31",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar31")}, ">+1");
+        tLine.to("#cmd1", {duration: 1, autoAlpha: 1}, "<");
+
+        tLine.addLabel("apRequests");
+        tLine.set("#req1", {x: -260, y: 755});
+        tLine.from("#nar32",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar32")});
+        tLine.to("#req1", {duration: 1, autoAlpha: 1}, "<");
+
+        tLine.addLabel("apObservations");
+        tLine.set("#obs1", {x: -260, y: 805});
+        tLine.from("#nar33",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar33")});
+        tLine.to("#obs1", {duration: 1, autoAlpha: 1}, "<");
 
         tLine.addLabel("asFarAsIvgotten");
         tLine.to(".narrative",  {duration: .1, autoAlpha: 0});
-        tLine.to("#cmd1", {duration: 1, autoAlpha: 0}, "<");
-        tLine.to("#obs1", {duration: 1, autoAlpha: 0}, "<");
-        tLine.to("#req1", {duration: 1, autoAlpha: 0}, "<");
+        tLine.to(["#obs1", "#req1","#cmd1"], {duration: .1, autoAlpha: 0});
         tLine.from("#narsorry",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#narsorry")})
 
         tLine.addLabel("userInputAgain");
@@ -435,9 +433,6 @@
         tLine.add(coreArrowAnim(), ">-.25")
         tLine.add(planeMove1(), "<+.25");
         tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
-
-
-
 
         // tLine.addLabel("whyNotAnAI");
         // tLine.from("#the-ai", {duration: .5, autoAlpha:0});
@@ -469,7 +464,6 @@
         tLine.add(coreArrowAnim(), ">-.25")
         tLine.add(planeMove1(), "<+.25");
         tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
-
 
         setupGotoLabels(tLine);
         tLine.pause();
