@@ -11,7 +11,8 @@
     { "name": "Sys: P2pNet", "color": "#FD99D4", "description": "" },
     { "name": "Sys: Unity", "color": "#B21DC0", "description": "" },
 
-    { "name": "Status: In-progress", "color": "#00F514", "description": "Currently in-work" },
+    { "name": "Status: In Progress", "color": "#00F514", "description": "Currently in-work" },
+    { "name": "Status: On Hold", "color": "#ff8000", "description": "Waiting for something else" },
 
     { "name": "Pri: Critical",  "color": "#ff0000", "description": "Gotta fix it" },
     { "name": "Pri: Important", "color": "#ff8000", "description": "Pretty important" }
