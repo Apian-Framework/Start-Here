@@ -13,6 +13,7 @@
 
     { "name": "Status: In Progress", "color": "#00F514", "description": "Currently in-work" },
     { "name": "Status: On Hold", "color": "#ff8000", "description": "Waiting for something else" },
+    { "name": "Status: Blocked", "color": "#FF0000", "description": "Blocked by another issues" },
 
     { "name": "Pri: Critical",  "color": "#ff0000", "description": "Gotta fix it" },
     { "name": "Pri: Important", "color": "#ff8000", "description": "Pretty important" }
