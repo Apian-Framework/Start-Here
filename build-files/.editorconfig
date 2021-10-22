@@ -1,0 +1,84 @@
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+# root = true
+
+# C# files
+[*.cs]
+
+#
+# Change standard message severities.
+# It's not completely clear to me what these category setting actually do.
+#
+dotnet_analyzer_diagnostic.category-Design.severity = silent
+dotnet_analyzer_diagnostic.category-Naming.severity = silent
+dotnet_analyzer_diagnostic.category-Style.severity = silent
+
+# these are bogus
+# Generally a good idea - but the analyzer invokes it for many names that aren't C# keywords: Loop, Resume, End
+dotnet_diagnostic.CA1716.severity = silent; # Rename  member SomeClass.Foo() so that it no longer conflicts with the reserved language keyword.
+
+# Sorry - I disagree with this one. Could *maybe* live with it being a suggestion. But I don't think so.
+dotnet_diagnostic.CA1034.severity = silent; # Do not nest type Foo. Alternatively, change its accessibility so that it is not externally visible.
+
+#  There are a lot of these in public APIs in order to keep the API consistent.
+dotnet_diagnostic.IDE0060.severity = silent # IDE0060 - Remove unused parameter 'foo' if it is not part of a shipped public API
+dotnet_diagnostic.CA1801.severity = silent  # Parameter "foo"" of method "bar"" is never used. Remove the parameter or use it in the method body
+
+# I'm not ready to give up on underscores completely yet.
+dotnet_diagnostic.CA1305.severity = silent # Identifiers should not contain underscores
+
+# This just requires too much verbiage and here always should be using the current culture
+dotnet_diagnostic.CA1707.severity = silent # The behavior of 'int.Parse(string)' could vary based on the current user's locale settings.
+dotnet_diagnostic.CA1310.severity = silent # The behavior of 'string.EndsWith(string)' could vary based on the current user's locale settings.
+
+# These I just don;t want to be build-breakers or show up as warnings.
+# The informational complaints should still be there - and in most cases ought to be addressed.
+
+# CA1051: Do not declare visible instance fields
+# CA2211: Non-constant fields should not be visible
+# Aren't these more-or-less the same?
+dotnet_diagnostic.CA1051.severity = suggestion
+dotnet_diagnostic.CA2211.severity = suggestion
+dotnet_diagnostic.CA1024.severity = suggestion # Use properties where appropriate
+
+# I really SHOULD stop using this - will eventualy have to anyway.
+dotnet_diagnostic.CA5351.severity = suggestion; # SendCheckpointState uses a broken cryptographic algorithm MD5
+
+# assorted others
+dotnet_diagnostic.CA1002.severity = suggestion
+dotnet_diagnostic.CA1030.severity = suggestion # Consider making 'Foo' an event
+dotnet_diagnostic.CA1031.severity = suggestion # Modify 'Foo' to catch a more specific allowed exception type, or rethrow the exception
+dotnet_diagnostic.CA1062.severity = suggestion
+dotnet_diagnostic.CA1725.severity = suggestion
+dotnet_diagnostic.CA1822.severity = suggestion # Member 'FooMethod' does not access instance data and can be marked as static.
+dotnet_diagnostic.CA2109.severity = suggestion # Consider making 'OnPeerJoinedGameEvt' not externally visible
+dotnet_diagnostic.CA2201.severity = suggestion # Exception type System.Exception is not sufficiently specific
+dotnet_diagnostic.CA5394.severity = suggestion # Use cryptographically secure random number generators when randomness is required for security. It is frequently NOT required.
+dotnet_diagnostic.CA2225.severity = suggestion # Provide a method named 'Foo' as a friendly alternate for operator op_Foo
+
+
+#
+# Change default symbol styles
+#
+
+# private methods should be Pascal case with underscore prefix
+dotnet_naming_rule.private_methods_pascal_leading_underscore.severity = warning
+dotnet_naming_rule.private_methods_pascal_leading_underscore.symbols = private_method
+dotnet_naming_rule.private_methods_pascal_leading_underscore.style = private_method_style
+
+dotnet_naming_symbols.private_method.applicable_kinds           = method
+dotnet_naming_symbols.private_method.applicable_accessibilities = private
+
+dotnet_naming_style.private_method_style.capitalization = pascal_case
+dotnet_naming_style.private_method_style.required_prefix = _
+
+# protected methods should be Pascal case with NO underscore prefix
+# **** Why do I have to define this? It appears that defining the "private method" rule
+# above also makes it the case for protected methods as well. Why is that?
+dotnet_naming_rule.protected_methods_pascal_no_underscore.severity = warning
+dotnet_naming_rule.protected_methods_pascal_no_underscore.symbols = protected_method
+dotnet_naming_rule.protected_methods_pascal_no_underscore.style = protected_method_style
+
+dotnet_naming_symbols.protected_method.applicable_kinds           = method
+dotnet_naming_symbols.protected_method.applicable_accessibilities = protected
+
+dotnet_naming_style.protected_method_style.capitalization = pascal_case
