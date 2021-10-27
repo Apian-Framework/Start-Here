@@ -33,8 +33,6 @@
 
                     <img class="anim" id="qmark" src="img/qmark.png"/>
                     <img class="anim" id="apian" src="img/apian.png"/>
-                    <img class="anim" id="ap-core-arw" src="img/ap-core-arw.png"/>
-                    <img class="anim" id="apian-work-arw" src="img/work-arw.png"/>
 
                     <img class="anim" id="app-code" src="img/app-code.png"/>
                     <img class="anim" id="the-ai" src="img/ai.png"/>
@@ -56,10 +54,21 @@
                     <img class="anim" id="cloud-zoom" src="img/apian-zoom-lines.png"/>
                     <!-- <img class="anim" id="cloud-flash" src="img/apian-zoom-flash.png"/> -->
 
+                    <img class="anim" id="ap-core-arw" src="img/ap-core-arw.png"/>
+                    <img class="anim" id="apian-work-arw" src="img/work-arw.png"/>
+
                     <img class="anim" id="spark1" src="img/msg.png" />
                     <img class="anim" id="cmd1" src="img/command.png" />
                     <img class="anim" id="req1" src="img/request.png" />
                     <img class="anim" id="obs1" src="img/observation.png" />
+
+                    <img class="anim" id="req2" src="img/request.png" />
+                    <img class="anim" id="req3" src="img/request.png" />
+                    <img class="anim" id="req4" src="img/request.png" />
+
+                    <img class="anim" id="cmd2" src="img/command.png" />
+                    <img class="anim" id="cmd3" src="img/command.png" />
+                    <img class="anim" id="cmd4" src="img/command.png" />
 
                 </div>
 
@@ -82,7 +91,7 @@
                 <div class="narrative line5" id="nar13">&#11041; Logic must be deterministic. Cannot contain any stochastic code.</div>
                 <div class="narrative line6" id="nar14">&#11041; ...other stuff I can't think of right now...</div>
 
-                <div class="narrative line8" id="nar15">An AppCore instance contains all of the rules, logic, and state to perform the fundamental work of the application, but that's clearly not enough to be standalone application.</div>
+                <div class="narrative line8" id="nar15">An AppCore instance contains all of the rules, logic, and state to perform the fundamental work of the application, but that's clearly not enough to be a standalone consumer application.</div>
 
                 <div class="narrative line6" id="nar16">&nbsp;&nbsp; We're going to refer to the rest simply as the APPLICATION CODE.</div>
                 <div class="narrative line7" id="nar17">&#11041; It handles front-end tasks like rendering the CoreState for users.</div>
@@ -90,25 +99,35 @@
                 <div class="narrative line8" id="nar19">&#11041; As well as collecting user input - which is then sent to the AppCore.</div>
 
                 <div class="narrative line6" id="nar20">As mentioned earlier, random behavior is not allowed in the AppCore.</div>
-                <div class="narrative line7" id="nar21">So any randomly acting code - like an AI - has to live in the Application Code.</div>
+                <div class="narrative line7" id="nar21">So any component with randomness - like an AI - has to live in the Application Code.</div>
                 <div class="narrative line8" id="nar22">This is actually pretty cool, since now the AI and User actions work exactly the same way.</div>
 
                 <div class="narrative line6" id="nar23">Sending commands directly to the AppCore works pretty well for a single-user app.</div>
                 <div class="narrative line7" id="nar24">But that's not what we're trying to do.</div>
                 <div class="narrative line8" id="nar25">Which brings us to a new component: Apian</div>
 
-                <div class="narrative line6" id="nar26">An Apian instance is paired with a local AppCore instance.</div>
-                <div class="narrative line7" id="nar27">The most important thing about it is that it is actually a proxy...</div>
+                <div class="narrative line6" id="nar26">An Apian instance is always paired with an AppCore instance.</div>
+                <div class="narrative line7" id="nar27">And an important thing to know about it is that it is functionally a proxy...</div>
                 <div class="narrative line8" id="nar28">for a virtual "Apian Group" object...</div>
                 <div class="narrative line9" id="nar29">made up of it and the Apian instances of other peers.</div>
 
                 <div class="narrative line6" id="nar30">Apian defines 3 types of messages that "wrap" application directives:</div>
-                <div class="narrative line7" id="nar31">&nbsp;&nbsp;Requests - from the Application Code *ask* that a directive be applied.</div>
-                <div class="narrative line8" id="nar32">&nbsp;&nbsp;Observations - are similar to Requests, but originate from the AppCore itself.</div>
-                <div class="narrative line9" id="nar33">&nbsp;&nbsp;Commands - tell the AppCore to apply an application directive to the Core State.</div>
 
+                <div class="narrative line7" id="nar31">&nbsp;&nbsp;Commands - tell the AppCore to apply an application directive to the Core State.</div>
+                <div class="narrative line8" id="nar32">&nbsp;&nbsp;Requests - from the Application Code *ask* that a directive become a Command.</div>
+                <div class="narrative line9" id="nar33">&nbsp;&nbsp;Observations - are similar to Requests, but originate from the AppCore itself.</div>
+
+                <div class="narrative line6" id="nar34">The principal function of the Apian Group object is to decide which Requests and Observations get promoted to Commands and applied to the Core State</div>
+                <div class="narrative line8" id="nar35">...and in what order.</div>
+                <div class="narrative line8 center" id="nar36"><br>So putting it all together...</div>
+
+                <div class="narrative line6" id="nar37">Application Code collects input and creates an ApianRequest</div>
+                <div class="narrative line7" id="nar38">and sends it to the local Apian instance which distributes it to the group</div>
+                <div class="narrative line8" id="nar39">which agrees that it should be a command</div>
+                <div class="narrative line9" id="nar40">which is then applied to the AppCore.</div>
 
                 <div class="narrative line8" id="narsorry">Sorry! This is as far as I've gotten for now...</div>
+
 
             </div>
 
@@ -139,7 +158,7 @@
 
         function coreArrowAnim() {
             return gsap.timeline()
-            .fromTo("#core-arw", {tscale: .1, autoAlpha: 0},  {duration: .25, transformOrigin: "left", scale: 1, autoAlpha: 1, ease: "none"})
+            .fromTo("#core-arw", {scale: .1, autoAlpha: 0},  {duration: .25, transformOrigin: "left", scale: 1, autoAlpha: 1, ease: "none"})
             .fromTo("#core-state-hole", { scale: .1, autoAlpha: 0}, {duration: .25, scale: 1, autoAlpha: 1, ease: "none"}, "<")
             .to("#core-arw", {duration: .25, repeat: 5, yoyo: true, transformOrigin: "left", scaleX: 1.25, ease: "none"}, ">")
             .to("#core-arw", {duration: .25, transformOrigin: "left", scale: .1, autoAlpha: 0, ease: "none"}, ">")
@@ -338,9 +357,6 @@
         tLine.from("#nar22",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar22")});
         tLine.add(inputFromAI());
 
-        // Dup of above block
-        // Need to fix the app-core-arrow
-
         tLine.fromTo("#app-core-arw", {duration: .5, autoAlpha: 0, scale: .1},{autoAlpha: 1, scale: 1, transformOrigin: "bottom right"}, ">+1");
         tLine.to("#spark1", {x: 125, y:150, duration: 1}, ">");
         tLine.to("#app-core-arw", {duration: .5, autoAlpha: 0, scale: .1, transformOrigin: "top left"}, ">");
@@ -350,9 +366,7 @@
         tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
 
         tLine.addLabel("SometimesPrettyGood");
-        tLine.to("#nar20",  {duration: .1, autoAlpha: 0});
-        tLine.to("#nar21",  {duration: .1, autoAlpha: 0});
-        tLine.to("#nar22",  {duration: .1, autoAlpha: 0});
+        tLine.to(["#nar20","#nar21","#nar22"],  {duration: .1, autoAlpha: 0});
         tLine.add(undoPlaneMove1(), "<-.3");
         tLine.fromTo("#app-core-arw", {duration: .5, autoAlpha: 0, scale: .1},{autoAlpha: 1, scale: 1, transformOrigin: "bottom right"});
         tLine.from("#nar23",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar23")});
@@ -368,10 +382,8 @@
         tLine.from(["#apian"], {duration: 1, rotation: -360, scale: .1, autoAlpha: 0});
 
         tLine.addLabel("apianAppCorePair");
-        tLine.to("#nar23",  {duration: .1, autoAlpha: 0});
-        tLine.to("#nar24",  {duration: .1, autoAlpha: 0});
-        tLine.to("#nar25",  {duration: .1, autoAlpha: 0});
-        tLine.to(".narrative",  {duration: .1, autoAlpha: 0}, "<");
+        tLine.to(["#nar25","#nar24","#nar23","#nar26"],  {duration: .1, autoAlpha: 0});
+        //tLine.to(".narrative",  {duration: .1, autoAlpha: 0});
         tLine.from("#nar26",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar26")}, ">");
         tLine.fromTo("#apian-bkg", {autoAlpha: 0}, {duration: .25, repeat: 6, yoyo: true, ease: "step", autoAlpha: 1}, ">");
 
@@ -381,7 +393,6 @@
         tLine.addLabel("forACollective");
         tLine.to("#cloud-sm", {duration: 1, autoAlpha: 1});
         tLine.to("#app-frame", {duration: 1, left: 260}, "<");
-        //tLine.to("#cloud-zoom", {duration: 1, autoAlpha: 1}, "<");
         tLine.fromTo("#cloud-zoom", {autoAlpha: 0}, {duration: .25, repeat: 6, yoyo: true, ease: "step", autoAlpha: 1}, "<");
         tLine.from("#nar28",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar28")}, ">");
 
@@ -389,26 +400,86 @@
         tLine.to("#other-peers-sm", {duration: 1, autoAlpha: 1});
         tLine.from("#nar29",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar29")}, ">");
 
-        tLine.addLabel("apRequests");
-        tLine.to(".narrative",  {duration: .1, autoAlpha: 0}, ">");
+        tLine.addLabel("apCommands");
+        tLine.to(["#nar29","#nar28","#nar27","#nar26"],  {duration: .1, autoAlpha: 0});
+        //tLine.to(".narrative",  {duration: .1, autoAlpha: 0}, ">");
         tLine.from("#nar30",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar30")});
-        tLine.set("#req1", {x: -360, y: 705});
+        tLine.set("#cmd1", {x: -360, y: 705});
         tLine.from("#nar31",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar31")}, ">+1");
+        tLine.to("#cmd1", {duration: 1, autoAlpha: 1}, "<");
+
+        tLine.addLabel("apRequests");
+        tLine.set("#req1", {x: -360, y: 755});
+        tLine.from("#nar32",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar32")});
         tLine.to("#req1", {duration: 1, autoAlpha: 1}, "<");
 
         tLine.addLabel("apObservations");
-        tLine.set("#obs1", {x: -360, y: 755});
-        tLine.from("#nar32",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar32")});
+        tLine.set("#obs1", {x: -360, y: 805});
+        tLine.from("#nar33",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar33")});
         tLine.to("#obs1", {duration: 1, autoAlpha: 1}, "<");
 
-        tLine.addLabel("apCommands");
-        tLine.set("#cmd1", {x: -360, y: 805});
-        tLine.from("#nar33",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar33")});
-        tLine.to("#cmd1", {duration: 1, autoAlpha: 1}, "<");
+        tLine.addLabel("apPurpose");
+        tLine.to(["#nar30","#nar31","#nar32","#nar33"],  {duration: .1, autoAlpha: 0});
+        tLine.to(["#req1","#obs1","#cmd1"], {duration: .1, autoAlpha: 0}, "<");
+        tLine.from("#nar34",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar34")});
 
+        tLine.addLabel("apOrder");
+        tLine.from("#nar35",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar35")});
+        tLine.from("#nar36",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar36")},">+1");
+
+        tLine.addLabel("CollectUserInput");
+        tLine.to(["#nar34","#nar35","#nar36"],  {duration: .1, autoAlpha: 0});
+        tLine.from("#nar37",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar37")});
+        tLine.add(inputFromUser(), ">");
+        tLine.set("#req1", {x: 380, y: 520});
+        tLine.add(appWorkAnim());
+        tLine.fromTo("#req1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
+
+        tLine.addLabel("Req2Apian");
+        tLine.from("#nar38",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar38")});
+        // Move spark/req to apian instance.
+        tLine.fromTo("#app-ap-arw", {autoAlpha: 0, scale: .1, }, { duration: .5, autoAlpha: 1, scale: 1, transformOrigin: "right"});
+        tLine.fromTo(["#req1","#spark1"], {x: 380, y: 520}, {x: 125, y: 500, duration: .5});
+        tLine.to("#app-ap-arw", { duration: .5, autoAlpha: 0, scale: .1, transformOrigin: "left"});
+        // to the group
+        tLine.to(["#req1","#spark1"], {x: -180, y: 325, duration: .3});
+        tLine.set(["#req2","#req3","#req4"], {x: -180, y: 325, autoAlpha: 1});
+        tLine.to("#req2", {x: -130, y: 165, scale: .5, duration: .3}, "<");
+        tLine.to("#req3", {x: -295, y: 190, scale: .5, duration: .3}, "<");
+        tLine.to("#req4", {x: -180, y: 485, scale: .5, duration: .3}, "<");
+        tLine.set(["#req2","#req3","#req4"], {autoAlpha: 0});
+
+        tLine.addLabel("GroupPromotesReq");
+        tLine.from("#nar39",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar39")});
+        tLine.set("#cmd1", {x: -180, y: 325});
+        tLine.add(apianWorkAnim());
+        tLine.to("#req1", {autoAlpha: 0, duration: 1}, "<");
+        tLine.fromTo("#cmd1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
+        tLine.set(["#cmd2","#cmd3","#cmd4"], {x: -180, y: 325, autoAlpha: 1});
+
+        // run the commands back to the peers
+        tLine.to(["#cmd1","#spark1"], {x: 125, y: 500, duration: .3});
+        tLine.to("#cmd2", {x: -130, y: 165, scale: .5, duration: .3}, "<");
+        tLine.to("#cmd3", {x: -295, y: 190, scale: .5, duration: .3}, "<");
+        tLine.to("#cmd4", {x: -180, y: 485, scale: .5, duration: .3}, "<");
+        tLine.set(["#cmd2","#cmd3","#cmd4"], {autoAlpha: 0}, ">");
+
+        tLine.addLabel("Apply2Core");
+        tLine.from("#nar40",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar40")});
+        tLine.fromTo("#ap-core-arw", {autoAlpha: 0, scale: .1},{duration: .5, autoAlpha: 1, scale: 1, transformOrigin: "bottom"});
+        tLine.to("#cmd1", {x: 125, y:150, duration: 1});
+        tLine.to("#spark1", {x: 125, y:150, duration: 1},"<");
+        tLine.to("#ap-core-arw", {autoAlpha: 0, scale: .1, transformOrigin: "top"});
+        tLine.add(coreWorkAnim());
+        tLine.to("#cmd1", {duration: 1, autoAlpha: 0}, "<");
+        tLine.add(coreArrowAnim(), ">-.25")
+        tLine.add(planeMove1(), "<+.25");
+        tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
+
+
+        // As far as it goes for now
         tLine.addLabel("asFarAsIvgotten");
         tLine.to(".narrative",  {duration: .1, autoAlpha: 0});
-        tLine.to(["#obs1", "#req1","#cmd1"], {duration: .1, autoAlpha: 0});
         tLine.from("#narsorry",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#narsorry")})
 
         tLine.addLabel("userInputAgain");
@@ -427,16 +498,6 @@
         tLine.to("#req1", {autoAlpha: 0, duration: 1}, "<");
         tLine.fromTo("#cmd1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
 
-        tLine.addLabel("apianMakesWork");
-        tLine.fromTo("#ap-core-arw", {autoAlpha: 0, scale: .1},{duration: .5, autoAlpha: 1, scale: 1, transformOrigin: "bottom"});
-        tLine.to("#cmd1", {x: 125, y:150, duration: 1});
-        tLine.to("#spark1", {x: 125, y:150, duration: 1},"<");
-        tLine.to("#ap-core-arw", {autoAlpha: 0, scale: .1, transformOrigin: "top"});
-        tLine.add(coreWorkAnim());
-        tLine.to("#cmd1", {duration: 1, autoAlpha: 0}, "<");
-        tLine.add(coreArrowAnim(), ">-.25")
-        tLine.add(planeMove1(), "<+.25");
-        tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
 
         // tLine.addLabel("whyNotAnAI");
         // tLine.from("#the-ai", {duration: .5, autoAlpha:0});

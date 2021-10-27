@@ -111,8 +111,10 @@ html {
 }
 
 #apian-work-arw {
-    left: 100px;
-    top: 465px;
+/*    left: 100px;
+    top: 465px; */
+    left: -205px;
+    top: 290px;
 }
 
 #app-code {
@@ -195,12 +197,12 @@ html {
     top: 0;
 }
 
-#cmd1 {
+#cmd1, #cmd2, #cmd3, #cmd4 {
     left: 0;
     top: 0;
 }
 
-#req1 {
+#req1, #req2, #req3, #req4 {
     left: 0;
     top: 0;
 }
@@ -220,6 +222,14 @@ div.narrative {
     font-size: 2.5em;
     visibility: visible;
     color: var(--nar-color);
+}
+
+.narrative.right {
+    left: 750px;
+}
+
+.narrative.center {
+    text-align: center;
 }
 
 .narrative.line1 {
