@@ -4,7 +4,7 @@
 
 >Apian is a blockchain-compatible code framework and protocol for the management of shared data in highly interactive multi-user applications - games in particular. Apian is complete, flexible, and extensible, and provides a developer the ability to go from idea to prototype without having to spend 2/3 of her time on support infrastructure.
 
-Clear as mud, right? [Check here](what-is-apian) for a more complete overview.
+Clear as mud, right? [Check here](https://apian-framework.github.io/Start-Here/) for a more complete overview.
 
 
 
