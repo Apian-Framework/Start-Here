@@ -88,10 +88,11 @@
                 <div class="narrative line2" id="nar10">Some AppCore rules:</div>
                 <div class="narrative line3" id="nar11">&#11041; State can be seen and queried by everyone.</div>
                 <div class="narrative line4" id="nar12">&#11041; State can ONLY be modified via external commands.</div>
-                <div class="narrative line5" id="nar13">&#11041; Logic must be deterministic. Cannot contain any stochastic code.</div>
-                <div class="narrative line6" id="nar14">&#11041; ...other stuff I can't think of right now...</div>
+                <div class="narrative line5" id="nar13">&#11041; State must be serializable, restorable, and hashable.</div>
+                <div class="narrative line6" id="nar14">&#11041; Logic must be deterministic. Cannot contain any stochastic code.</div>
 
-                <div class="narrative line8" id="nar15">An AppCore instance contains all of the rules, logic, and state to perform the fundamental work of the application, but that's clearly not enough to be a standalone consumer application.</div>
+
+                <div class="narrative line7_5" id="nar15">An AppCore instance contains all of the rules, logic, and state to perform the fundamental work of the application, but that's clearly not enough to be a standalone consumer product.</div>
 
                 <div class="narrative line6" id="nar16">&nbsp;&nbsp; We're going to refer to the rest simply as the APPLICATION CODE.</div>
                 <div class="narrative line7" id="nar17">&#11041; It handles front-end tasks like rendering the CoreState for users.</div>

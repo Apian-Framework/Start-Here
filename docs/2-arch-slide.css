@@ -260,8 +260,16 @@ div.narrative {
     top: 770px;
 }
 
+.narrative.line7_5 {
+    top: 795px;
+}
+
 .narrative.line8 {
     top: 820px;
+}
+
+.narrative.line8_5 {
+    top: 845px;
 }
 
 .narrative.line9 {
