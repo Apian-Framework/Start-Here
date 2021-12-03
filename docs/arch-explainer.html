@@ -26,6 +26,7 @@
                         <img class="anim" id="core-state-hole" src="img/hole.png"/>
                         <img class="anim" id="plane-rd-lt" src="img/plane-rd-lt.png"/>
                         <img class="anim" id="plane-rd-rt" src="img/plane-rd-rt.png"/>
+                        <img class="anim" id="plane-rd-rt2" src="img/plane-rd-rt.png"/>
                         <img class="anim" id="plane-bl-lt" src="img/plane-bl-lt.png"/>
                         <img class="anim" id="plane-bl-rt" src="img/plane-bl-rt.png"/>
                         <img class="anim" id="core-arw" src="img/core-arw.png"/>
@@ -91,7 +92,6 @@
                 <div class="narrative line5" id="nar13">&#11041; State must be serializable, restorable, and hashable.</div>
                 <div class="narrative line6" id="nar14">&#11041; Logic must be deterministic. Cannot contain any stochastic code.</div>
 
-
                 <div class="narrative line7_5" id="nar15">An AppCore instance contains all of the rules, logic, and state to perform the fundamental work of the application, but that's clearly not enough to be a standalone consumer product.</div>
 
                 <div class="narrative line6" id="nar16">&nbsp;&nbsp; We're going to refer to the rest simply as the APPLICATION CODE.</div>
@@ -126,6 +126,10 @@
                 <div class="narrative line7" id="nar38">and sends it to the local Apian instance which distributes it to the group</div>
                 <div class="narrative line8" id="nar39">which agrees that it should be a command</div>
                 <div class="narrative line9" id="nar40">which is then applied to the AppCore.</div>
+
+                <div class="narrative line6" id="nar41">In much the same way, a remote peer can send a Request to Apian.</div>
+                <div class="narrative line7" id="nar42">Which the Apian group might promote to a Command.</div>
+                <div class="narrative line8" id="nar43">Which will be allied to everyone's App Core.</div>
 
                 <div class="narrative line8" id="narsorry">Sorry! This is as far as I've gotten for now...</div>
 
@@ -178,6 +182,13 @@
             .set("#plane-bl-rt", {duration: .5, x: 0, rotation: 0}, ">")
             .to("#plane-bl-rt", {duration: .5, autoAlpha: 1},">");
 
+        }
+
+        function planeMove2() {
+            return gsap.timeline()
+            .to("#plane-rd-lt", {duration: .5, x: -38, y: 38})
+            .to("#plane-rd-lt", {duration: .5, rotation: -90, autoAlpha: 0}) // rotate to point down/right while fade out
+            .fromTo("#plane-rd-rt2", {y: -77, rotation: 135}, {rotation: 45, autoAlpha: 1, duration: .5}, "<");
         }
 
         function appWorkAnim() {
@@ -477,27 +488,66 @@
         tLine.add(planeMove1(), "<+.25");
         tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
 
+        // Remote req
+        tLine.addLabel("RemoteRequest");
+        tLine.to(["#nar37","#nar38","#nar39","#nar40"],  {duration: .1, autoAlpha: 0});
+        tLine.from("#nar41",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar41")});
+
+        tLine.set(["#req1","#spark1"], {x: -295, y: 190, scale: .5, autoAlpha: 1}, ">");
+        tLine.to(["#req1","#spark1"], {x: -180, y: 325, duration: .5, scale: 1}, ">+1");
+
+        // promoted to command
+        tLine.addLabel("PromoteRemote");
+        tLine.from("#nar42",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar42")});
+
+        tLine.set("#cmd1", {x: -180, y: 325, scale: 1});
+        tLine.add(apianWorkAnim());
+        tLine.to("#req1", {autoAlpha: 0, duration: 1}, "<");
+        tLine.fromTo("#cmd1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
+
+        // distributed and applied
+        tLine.addLabel("ApplyRemote");
+        tLine.from("#nar43",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#nar43")});
+        tLine.set(["#cmd2","#cmd3","#cmd4"], {x: -180, y: 325, scale: 1, autoAlpha: 1});
+
+        // run the commands back to the peers
+        tLine.to(["#cmd1","#spark1"], {x: 125, y: 500, duration: .3});
+        tLine.to("#cmd2", {x: -130, y: 165, scale: .5, duration: .3}, "<");
+        tLine.to("#cmd3", {x: -295, y: 190, scale: .5, duration: .3}, "<");
+        tLine.to("#cmd4", {x: -180, y: 485, scale: .5, duration: .3}, "<");
+        tLine.set(["#cmd2","#cmd3","#cmd4"], {autoAlpha: 0}, ">");
+
+        // Do the local AppCore thing
+        tLine.fromTo("#ap-core-arw", {autoAlpha: 0, scale: .1},{duration: .5, autoAlpha: 1, scale: 1, transformOrigin: "bottom"});
+        tLine.to("#cmd1", {x: 125, y:150, duration: 1});
+        tLine.to("#spark1", {x: 125, y:150, duration: 1},"<");
+        tLine.to("#ap-core-arw", {autoAlpha: 0, scale: .1, transformOrigin: "top"});
+        tLine.add(coreWorkAnim());
+        tLine.to("#cmd1", {duration: 1, autoAlpha: 0}, "<");
+        tLine.add(coreArrowAnim(), ">-.25")
+        tLine.add(planeMove2(), "<+.25");
+        tLine.to("#spark1", {duration: 1, autoAlpha: 0}, "<+.5");
 
         // As far as it goes for now
         tLine.addLabel("asFarAsIvgotten");
         tLine.to(".narrative",  {duration: .1, autoAlpha: 0});
         tLine.from("#narsorry",  {duration: 1, autoAlpha: 0, onStart: ()=>hilightNar("#narsorry")})
 
-        tLine.addLabel("userInputAgain");
-        tLine.add(inputFromUser());
-        tLine.set("#req1", {x: 380, y: 520});
-        tLine.add(appWorkAnim());
-        tLine.fromTo("#req1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
+        // tLine.addLabel("userInputAgain");
+        // tLine.add(inputFromUser());
+        // tLine.set("#req1", {x: 380, y: 520});
+        // tLine.add(appWorkAnim());
+        // tLine.fromTo("#req1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
 
-        tLine.addLabel("requestToApian");
-        tLine.fromTo("#app-ap-arw", {autoAlpha: 0, scale: .1, }, { duration: .5, autoAlpha: 1, scale: 1, transformOrigin: "right"});
-        tLine.fromTo("#req1", {x: 380, y: 520}, {x: 125, y: 500, duration: .5});
-        tLine.fromTo("#spark1", {x: 380, y: 520}, {x: 125, y: 500, duration: .5}, "<");
-        tLine.to("#app-ap-arw", { duration: .5, autoAlpha: 0, scale: .1, transformOrigin: "left"});
-        tLine.set("#cmd1", {x: 125, y: 500});
-        tLine.add(apianWorkAnim());
-        tLine.to("#req1", {autoAlpha: 0, duration: 1}, "<");
-        tLine.fromTo("#cmd1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
+        // tLine.addLabel("requestToApian");
+        // tLine.fromTo("#app-ap-arw", {autoAlpha: 0, scale: .1, }, { duration: .5, autoAlpha: 1, scale: 1, transformOrigin: "right"});
+        // tLine.fromTo("#req1", {x: 380, y: 520}, {x: 125, y: 500, duration: .5});
+        // tLine.fromTo("#spark1", {x: 380, y: 520}, {x: 125, y: 500, duration: .5}, "<");
+        // tLine.to("#app-ap-arw", { duration: .5, autoAlpha: 0, scale: .1, transformOrigin: "left"});
+        // tLine.set("#cmd1", {x: 125, y: 500});
+        // tLine.add(apianWorkAnim());
+        // tLine.to("#req1", {autoAlpha: 0, duration: 1}, "<");
+        // tLine.fromTo("#cmd1", {autoAlpha: 0}, {autoAlpha:1, duration: 1}, "<");
 
 
         // tLine.addLabel("whyNotAnAI");

@@ -69,7 +69,13 @@ html {
     transform:rotate(-45deg);
 }
 
+
 #plane-rd-rt {
+    left: 355px;
+    top: 220px;
+}
+
+#plane-rd-rt2 {
     left: 355px;
     top: 220px;
 }
