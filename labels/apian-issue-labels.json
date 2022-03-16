@@ -10,6 +10,7 @@
     { "name": "Sys: Beam", "color": "#7C85FF", "description": "" },
     { "name": "Sys: P2pNet", "color": "#FD99D4", "description": "" },
     { "name": "Sys: Unity", "color": "#B21DC0", "description": "" },
+    { "name": "Sys: Libp2p", "color": "#1DC074", "description": "" },
 
     { "name": "Status: In Progress", "color": "#00F514", "description": "Currently in-work" },
     { "name": "Status: On Hold", "color": "#ff8000", "description": "Waiting for something else" },

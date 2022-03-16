@@ -22,7 +22,7 @@ echo $JSON_FILE
 echo
 
 
-destApianRepos=("Ace" "Apian.Net" "Beam.Cli" "Beam.Unity" "BeamGameCode" "NotUnityEngine" "P2pNet" "Start-Here" "UniLog")
+destApianRepos=("Ace" "Apian.Net" "Beam.Cli" "Beam.Unity" "BeamGameCode" "Libp2p-Unity" "NotUnityEngine" "P2pNet" "Start-Here" "UniLog")
 
 for repo in "${destApianRepos[@]}"; do
 
