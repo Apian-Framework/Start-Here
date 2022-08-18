@@ -2,7 +2,7 @@
 
 DESTPATH=$1
 URL_BASE="https://github.com/Apian-Framework/"
-allAianRepos=("Start-Here" "Apian.Net" "BeamGameCode" "Beam.Cli" "Beam.Unity" "P2pNet" "NotUnityEngine" "UniLog")
+allApianRepos=("Apian.Net" "ApianAppUtils" "Beam.Cli" "Beam.Unity" "BeamGameCode" "Libp2p-Unity" "MqttJS-Unity" "NotUnityEngine" "P2pNet" "Start-Here" "UniLog")
 
 #check for git lfs
 # git lfs version: "git-lfs/2.11.0 (GitHub; windows amd64; go 1.14.2; git 48b28d97)"
@@ -20,7 +20,7 @@ then
 fi
 
 
-for repo in "${allAianRepos[@]}"
+for repo in "${allApianRepos[@]}"
 do
     echo $repo...
     cmd="git clone ${URL_BASE}${repo}.git ${DESTPATH}/${repo}"

@@ -13,8 +13,11 @@ if  "%DESTPATH%" == "" (
   exit /b
 )
 
+set ALL_REPOS=Apian.Net ApianAppUtils Beam.Cli Beam.Unity BeamGameCode Libp2p-Unity MqttJS-Unity NotUnityEngine P2pNet Start-Here UniLog
+
 rem clone the repos
-for %%r in (Start-Here Apian.Net BeamGameCode Beam.Cli Beam.Unity P2pNet NotUnityEngine UniLog) do (
+for %%r in (%ALL_REPOS%) do (
   echo git clone %URL_BASE%%%r.git %DESTPATH%/%%r
   git clone %URL_BASE%%%r.git %DESTPATH%\%%r
 )
+
