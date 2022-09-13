@@ -24,8 +24,8 @@ In addition to card- and tile-like objects with immutable internal state, physic
 
 "Pursuit" by Aurora was a good example back in the 1970's: https://thetoystimeforgot.com/product/aurora-pursuit-game/  <br> In it, a player's "turn" consists of revealing a plane's orientation, moving it in the appropriate direction, then concealing and changing (or not) its orientation.
 
-The actual point to all of this is that in these in-person examples even though there is information that is concealed from one or more players, the actual "game state" is fully public. Hidden object state is latent in the configuration or structure of the data objects themselves. There is no private game state - data objects of which any of he players are unaware. A "card up someone's sleeve," for instance.
-> This is awfully close to being a stupid semantic nothing-of-a-point. I'm having a difficult time articulating what I think is interesting/important here.
+The actual point to all of this is that in these in-person examples even though there is information that is concealed from one or more players, the actual "game state" is fully public and visible to all players. Hidden object state is latent in the configuration or structure of the data objects themselves. There is no private game state - data objects of which any of he players are unaware. A "card up someone's sleeve," for instance.
+> This is awfully close to being a stupid semantic nothing-of-a-point. I'm having a difficult time articulating what I think is interesting/important here. It has to do with the idea that even with the concealment, all of the players are able to satisfy themselves that the game is being played fairly because they have watched all manipulation and movement of the game objects.
 
 
 
