@@ -16,7 +16,7 @@ Actually, before going any further there is a clarification that must be made: i
 While the construction of a single-sided playing card is about as simple as can be imagined, it is what makes possible these mechanisms necessary to play:
 
  - A card can be manipulated to conceal or reveal its content
- - A closed card can be moved positionally without revealing its state
+ - A concealed card can be moved positionally without revealing its state
  - An observer can always see when a card is being manipulated or moved
  - ~~A deck of concealed cards can be mixed in such a manner that an observer can verify it's been done and even the person doing the shuffling won't know the resulting order.~~
 
@@ -24,13 +24,11 @@ In addition to card- and tile-like objects with immutable internal state, physic
 
 The actual point to all of this is that in these in-person examples, even though there is information that is concealed from one or more players, the actual "game state" is fully public and visible to all players. Hidden information is latent in the configuration or structure of the data objects themselves. There is no private game state - data objects of which any of he players are unaware. A "card up someone's sleeve," for instance.
 
-> This is awfully close to being a stupid semantic nothing-of-a-point. I'm having a difficult time articulating what I think is interesting/important here. It has to do with the idea that even with the concealment, all of the players are able to satisfy themselves that the game is being played fairly because they have watched all manipulation and movement of the game objects.
+_[ This is awfully close to being a stupid semantic nothing-of-a-point. I'm having a difficult time articulating what I think is interesting/important here. It has to do with the idea that even with the concealment, all of the players are able to satisfy themselves that the game is being played fairly because they have watched all manipulation and movement of the game objects. I'll fix it. ]_
 
+> In centralized, server-based, online games all of this is really trivial - the server acts as an omniscient and all-powerful "game master" and holds all of the game object state internally, as **private** data, and reveals different bits of it to different players.
 
-
-
-<!--
-In centralized, server-based, online games all of this is really trivial - the server acts as an omniscient and all-powerful "game master" and, well, just does it. In an in-person situation this would be equivalent to having another person in the room, watching and shuffling and handing things out - but not actually playing the game. None of the players would have to worry about watching anything.
+, well, just does it. In an in-person situation this would be equivalent to having another person in the room, watching and shuffling and handing things out - but not actually playing the game. None of the players would have to worry about watching anything.
 -->
 
 
