@@ -26,10 +26,13 @@ The actual point to all of this is that in these in-person examples, even though
 
 _[ This is awfully close to being a stupid semantic nothing-of-a-point. I'm having a difficult time articulating what I think is interesting/important here. It has to do with the idea that even with the concealment, all of the players are able to satisfy themselves that the game is being played fairly because they have watched all manipulation and movement of the game objects. I'll fix it. ]_
 
-> In centralized, server-based, online games all of this is really trivial - the server acts as an omniscient and all-powerful "game master" and holds all of the game object state internally, as **private** data, and reveals different bits of it to different players.
+### In a Decentralized Online Game
+<br />
 
-, well, just does it. In an in-person situation this would be equivalent to having another person in the room, watching and shuffling and handing things out - but not actually playing the game. None of the players would have to worry about watching anything.
--->
+> In centralized, server-based, online game all of this is nearly trivial - the server acts as an omniscient and all-powerful "game master" and holds _all_ of the game object state internally, as **private** data, and reveals different bits of it to different players as gameplay progresses.
+
+<br />
+In the most common architecture for a decentralized online game every peer (participant computer) has a local copy of the public game state. Ensuring that every peer has an identical copy of the state is one of the major challenges in creating a game of this sort, but that is not the issue here. So assume every peer always has an identical copy of the public game state.
 
 
 
