@@ -34,6 +34,12 @@ _[ This is awfully close to being a stupid semantic nothing-of-a-point. I'm havi
 <br />
 In the most common architecture for a decentralized online game every peer (participant computer) has a local copy of the public game state. Ensuring that every peer has an identical copy of the state is one of the major challenges in creating a game of this sort, but that is not the issue here. So assume every peer always has an identical copy of the public game state.
 
+Looking at the above examples of board-game hidden information it is difficult to see how they might be useful. After all, in all of them security comes from having players (and potentially other people) physically present and watching the game objects to ensure they aren't being viewed or manipulated improperly. How is that helpful in thinking about how to design a mechanism for an online peer-to-peer game?
+
+
+
+
+
 
 
 

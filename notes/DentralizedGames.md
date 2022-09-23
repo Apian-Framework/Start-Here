@@ -17,7 +17,7 @@ This is what [Apian](https://github.com/Apian-Framework/Apian.Net) is for. Once 
 
 ## Persistence
 
-What happens when the peers in a p2p network game all go away? Is the game just over? The absolute bonehead-simplest answer is simply no to let that happen. As long as it's possible to have a peer in the game that has the global state, but is not actually _playing_ (and this is required by Apian for other reasons) then as long as that peer sticks around the game state still exists.
+What happens when the peers in a p2p network game all go away? Is the game just over? The absolute bonehead-simplest answer is simply not to let that happen. As long as it's possible to have a peer in the game that has the global state, but is not actually _playing_ (and this is required by Apian for other reasons) then as long as that peer sticks around the game state still exists.
 
 But you really ought to be able to write it to some sort of permanent datastore. And reload/restart it, too.
 
