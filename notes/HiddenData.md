@@ -27,11 +27,9 @@ The actual point to all of this is that in these in-person examples, even though
 _[ This is awfully close to being a stupid semantic nothing-of-a-point. I'm having a difficult time articulating what I think is interesting/important here. It has to do with the idea that even with the concealment, all of the players are able to satisfy themselves that the game is being played fairly because they have watched all manipulation and movement of the game objects. I'll try to fix it. ]_
 
 ### In a Decentralized Online Game
-<br />
 
 > In centralized, server-based, online game all of this is nearly trivial - the server acts as an omniscient and all-powerful "game master" and holds _all_ of the game object state internally, as **private** data, and reveals different bits of it to different players as gameplay progresses.
 
-<br />
 In the most common architecture for a decentralized online game every peer (participant computer) has a local copy of the public game state. Ensuring that every peer has an identical copy of the state is one of the major challenges in creating a game of this sort, but that is not the issue here. So assume every peer always has an identical copy of the public game state.
 
 Looking at the above examples of board-game hidden information it is difficult to see how they might be useful. After all, in all of them security comes from having players (and potentially other people) physically present and watching the game objects to ensure they aren't being viewed or manipulated improperly. How is that helpful in thinking about how to design a mechanism for an online peer-to-peer game?
