@@ -34,6 +34,12 @@ In the most common architecture for a decentralized online game every peer (part
 
 Looking at the above examples of board-game hidden information it is difficult to see how they might be useful. After all, in all of them security comes from having players (and potentially other people) physically present and watching the game objects to ensure they aren't being viewed or manipulated improperly. How is that helpful in thinking about how to design a mechanism for an online peer-to-peer game?
 
+This is because the players in an online game cannot see what one another are doing, nor are they "looking at" the same cards and/or game pieces. They are instead each looking at their own magically synchronized _copy_ of the game state.
+
+> I think the meat-space analysis might just be stupid.
+
+
+
 
 
 
