@@ -32,11 +32,32 @@ _[ This is awfully close to being a stupid semantic nothing-of-a-point. I'm havi
 
 In the most common architecture for a decentralized online game every peer (participant computer) has a local copy of the public game state. Ensuring that every peer has an identical copy of the state is one of the major challenges in creating a game of this sort, but that is not the issue here. So assume every peer always has an identical copy of the public game state.
 
-Looking at the above examples of board-game hidden information it is difficult to see how they might be useful. After all, in all of them security comes from having players (and potentially other people) physically present and watching the game objects to ensure they aren't being viewed or manipulated improperly. How is that helpful in thinking about how to design a mechanism for an online peer-to-peer game?
+In the above examples of board-game hidden information, security comes from having players (and potentially other people) physically present and watching the game pieces to ensure they aren't being viewed or manipulated improperly. But players in an online game cannot see what one another are doing, nor are they even "looking at" the same cards and/or game pieces. They are instead each looking at their own magically synchronized _copy_ of the game state.
 
-This is because the players in an online game cannot see what one another are doing, nor are they "looking at" the same cards and/or game pieces. They are instead each looking at their own magically synchronized _copy_ of the game state.
+> It seems to me that there is value in comparing the meat-space and online situations, but it's stretching things pretty far to try to bring them together: "everyone is in a separate room and there are elves running around carrying written notes among them..."
 
-> I think the meat-space analysis might just be stupid.
+## Actual examples of hidden information.
+
+### Commit-Reveal
+
+Probably the simplest example of hidden information is when a player makes a secret, irrevocable, choice regarding an action that he will take at some time in the future. This might take the form of a card played face-down, or a number written on a slip of paper, or maybe setting the direction of an airplane hidden from an opponent's view. The player commits himself to the choice in some publicly verifiable way, but doesn't reveal the choice until later. But when the choice is "revealed" and made use of, it is no longer secret and stops being hidden information.
+
+In order to do this as part of a non-local game is is necessary for the player to publicly produce a number, or message, or token of some sort that is uniquely related to the choice, but for which the logic of the relationship travels in one direction only: starting with the choice and ending with the token. Examining the token provides absolutely no information as the the choice. When the time comes to reveal the choice, the player is able to show how starting with the choice results in ending with the token, and is the only choice that can do so.
+
+While there may be some physical game-piece-way to implement this mechanism, what it is actually describing is a _cryptographic hash function_: a mathematical function that takes a piece of data (a number, or some text, or a whole file) and transforms it into a single unique number that is completely unrelated to the input. 2 pieces of input that are almost exactly the same will result in completely different hash values, and no 2 pieces of data will ever result in the same hash. But the most important thing about cryptographic hash functions is that they only go one way. Given the resulting output value there is no possible way to calculate the input.
+
+> It would be nice to have a reference here to a discussion of hash functions in general, and to specifically address the cryptographic hash properties: a) that every different results in a _unique_ hash, and b) the whole "one way function" thing, which is hopefully a little disturbing to folks who remember their algebra. I should write one.
+
+An issue that comes up when using hashes to publicly commit a secret is that hash functions are _deterministic_: for the same input they will always return the same output. Of course, this _has_ to be the case in order for the whole commit-reveal process to work. But it is problematic when there are only a few well-known choices - say, "rock", "paper", and "scissors", as your opponent can compute for herself beforehand the hash values for those words and be able to know your input from the commitment.
+
+To deal with this you should "salt" your choice with a random value. Instead of simply sending `hash_func("rock")`, you select a random value and append it to your choice and send `hash_func("rock0x23fed38")` - which results in a value that is not in any way related to the hash of "rock". When it comes time to reveal, you send both your choice and the salt value to your opponent, who can then hash them together and verify that your choice and commitment agree.
+
+Here is a Jupyter notebook demonstrating a basic use of hash-based commit-reveal:
+- [On GitHub](https://github.com/Apian-Framework/Jupyter-Notebooks/blob/main/HashCommitReveal.ipynb)
+- [Interactive on Binder](https://mybinder.org/v2/gh/Apian-Framework/Jupyter-Notebooks/main?labpath=HashCommitReveal.ipynb)
+
+
+
 
 
 
