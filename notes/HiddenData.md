@@ -70,7 +70,7 @@ Here is a Jupyter notebook demonstrating a secure secret comparison:
 
 ### Commutative Encryption
 
-> This is basically for playing cards. An Elgamal-based cryptosystem is constructed in which cards are encrypted by multiple players but the partial homomorphic nature of Elgamal makes it possible to apply decryptions in any order. SO, for instance, if a card is "dealt" to one player and everyone else applies their decryption key - then the owner of the card (by privately applying her own key locally) is able to view the card while no on else can. I don't have a notebook set up for this document - but I do have all of this already in notebook form.
+> This is for playing cards. An Elgamal-based cryptosystem is constructed in which cards are encrypted by multiple players but the partial homomorphic nature of Elgamal makes it possible to apply decryptions in any order. SO, for instance, if a card is "dealt" to one player and everyone else applies their decryption key - then the owner of the card (by privately applying her own key locally) is able to view the card while no on else can. I don't have a notebook set up for this document - but I do have all of this already in notebook form.
 
 ### Peer to Peer Shuffling/Mixing Without a Trusted Third Party
 
@@ -78,7 +78,7 @@ Here is a Jupyter notebook demonstrating a secure secret comparison:
 
 ### The Dropped Player Problem
 
-> If you have gang-encrypted date that requires a set of people to decrypt - and one of them goes away, what do you do? Basically it's Shamir Secret Sharing of keys beforehand.
+> If you have gang-encrypted date that requires a set of people to decrypt - and one of them goes away, what do you do? Pretty much it's Shamir Secret Sharing of keys beforehand.
 
 
 
