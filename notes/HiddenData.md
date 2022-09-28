@@ -46,7 +46,7 @@ In order to do this as part of a non-local game is is necessary for the player t
 
 What this is actually describing is a _cryptographic hash function_: a mathematical function that takes a piece of data (a number, or some text, or a whole file) and transforms it into a single unique number that is completely unrelated to the input. Two different inputs that are _almost_ exactly the same will result in completely different hash values, and no two different pieces of data will ever result in the same hash. But the most important thing about cryptographic hash functions is that they only go one way: given the resulting hash value there is no possible way to calculate the input the produced it.
 
-When the player later reveals the input for a committed hash to other players, they are able to apply the hash function to the value and verify for themselves that it does, in fact, result in the revealed value.
+When the player later reveals the input for a committed hash to other players, they are able to apply the hash function to the value and verify for themselves that it does, in fact, result in the commited hash.
 
 > It would be nice to have a reference here to a discussion of hash functions in general, and to specifically address the cryptographic hash properties: a) that every different results in a _unique_ hash, and b) the whole "one way function" thing, which is hopefully a little disturbing to folks who remember their algebra. I should write one.
 
