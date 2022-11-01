@@ -47,3 +47,8 @@ body {
 .bk-y {
     background-color: #ffe88b;
 }
+
+.inline-img {
+    display: inline-block;
+    height: 1em;
+}
