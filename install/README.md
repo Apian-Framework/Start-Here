@@ -1,6 +1,6 @@
 # Installing the Apian Framework
 
-## Install the .NET Core SDK
+## Install the .NET 6.0 SDK (or 7.0 if you are so inclined)
 
 [Get it from MicroSoft](https://dotnet.microsoft.com/download)
 
