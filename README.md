@@ -12,11 +12,13 @@ Clear as mud, right? [Check here](https://apian-framework.github.io/Start-Here/)
 
 While you can certainly build the Apian .NET support libraries, they don't *do* anything by themselves and so it wouldn't be very much fun.
 
-Your  best bet at the moment to visit the [Beam.Unity](https://github.com/Apian-Framework/Beam.Unity) and/or [Beam.Cli](https://github.com/Apian-Framework/Beam.Cli) repositories and follow the build instructions there.
+Your best bet is to clone the [source release repo](https://github.com/Apian-Framework/Beam-Releases) for the Beam demo application. The you can select a release branch and build and run the Beam.Cli console version of the app, or if you have Unity 3D installed you can build and run Beam.Unity.
 
-But if you really do just want to fetch and build the Apian Framework repositories, look [here](install/README.md)
+But if you really do just want to fetch and build the Apian Framework repositories individually, look [here](install/README.md)
 
 ## What *are* all of these repositories?
+
+
 
 
 
