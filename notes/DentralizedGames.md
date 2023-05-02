@@ -13,7 +13,7 @@ The P2pNet repo is [here](https://github.com/Apian-Framework/P2pNet) but I am wo
 
 ## Shared State Management
 
-This is what [Apian](https://github.com/Apian-Framework/Apian.Net) is for. Once again, it's kinda documentation-poor at the moment, but the basic idea of separation of game code from state management is shown [here](http://apian-framework.com/)
+This is what [Apian](https://github.com/Apian-Framework/Apian.Net) is for. Once again, it's kinda documentation-poor at the moment, but the basic idea of separation of game code from state management is shown [here](http://apian-framework.com/arch-explainer.html)
 
 ## Persistence
 
