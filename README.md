@@ -2,17 +2,21 @@
 
 ## About Apian
 
->Apian is a blockchain-compatible code framework and protocol for the management of shared data in highly interactive multi-user applications - games in particular. Apian is complete, flexible, and extensible, and provides a developer the ability to go from idea to prototype without having to spend 2/3 of her time on support infrastructure.
 
-Clear as mud, right? [Check here](https://apian-framework.github.io/Start-Here/) for a more complete overview.
+The Apian Framework is a collection of code libraries, protocols, and example application code intended as an example of how a fully decentralized online multiplayer game can be anchored by a public blockchain but have the participating machines themselves be responsible for running the game logic and managing the collective game state. Under Apian, game application instances create a peer-to-peer consensus network and collectively perform game event validation and sequencing, resulting in a uniform view of the game state across all peers.
 
+Most multiplayer blockchain-connected games focus on the use and transfer of tokens and are not overly concerned about decentralized gameplay, typically using traditional client/server architectures with centralized game servers. Other games that do strive to be fully decentralized generally do so being "fully on-chain" - putting all of the game logic and state in on-chain contracts so there is no single entity that owns or executes any of it.
+
+By moving the game code and state data from the public blockchain to the participant computers themselves Apian alleviates many of the difficulties and constraints that result from having them on-chain without having to rely on special-purpose chains or level 2 solutions. In fairness, Apian is not some kind of all-purpose perfect solution to decentralizing games, it is instead simply a different approach that trades some of the difficulties faced by fully on-chain games for different ones. The idea is that this will allow for different sorts of games to be decentralized, particularly ones that involve player interaction at a higher frequency than is practical or affordable on-chain.
+
+ Apian is complete, flexible, and extensible, and provides a developer the ability to go from idea to prototype without having to spend 2/3 of her time on support infrastructure.
 
 
 ## TLDR; I just want to build and run something...
 
 While you can certainly build the Apian .NET support libraries, they don't *do* anything by themselves and so it wouldn't be very much fun.
 
-Your best bet is to clone the [source release repo](https://github.com/Apian-Framework/Beam-Releases) for the Beam demo application. The you can select a release branch and build and run the Beam.Cli console version of the app, or if you have Unity 3D installed you can build and run Beam.Unity.
+Your best bet is to clone the [source release repo](https://github.com/Apian-Framework/Beam-Releases) for the Beam technology demo application. Then you can select a release branch and build and run either the Beam.Cli console version of the app or, if you have Unity 3D installed, you can build and run Beam.Unity.
 
 But if you really do just want to fetch and build the Apian Framework repositories individually, look [here](install/README.md)
 
