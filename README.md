@@ -27,45 +27,44 @@ But if you really do just want to fetch and build the Apian Framework repositori
 The repo you are looking at right now.
 
 ---
-### **Apian.Net**
+### [**Apian.Net**](https://github.com/Apian-Framework/Apian.Net)
 This is the real guts of the Apian Framework, and defines the architectures and protocols required to allow peers to form game-state-management consensus groups that are not locked-in to any particular protocol or network layer.
 
+---
+### [**Beam.Cli**](https://github.com/Apian-Framework/Beam.Cli)
+A console driver and frontend that together with BeamGameCode makes a cli version of the game suitable for testing or headless execution.
 
 ---
-### **P2pNet**
+### [**Beam.Unity**](https://github.com/Apian-Framework/Beam.Unity)
+A Unity 3D version of Beam. Network interoperable with Beam.Cli.
+
+---
+### [**BeamGameCode**](https://github.com/Apian-Framework/BeamGameCode)
+Platform-independent code forming the core of an Apian-based free-running simulator test/demo/game.
+
+---
+### [**Beam-Releases**](https://github.com/Apian-Framework/Beam-Releases)
+Trying a different approach to the monorepo, multi-repo tangle for an app dependent on a bunch of still-in-development libraries.
+
+---
+### [**P2pNet**](https://github.com/Apian-Framework/P2pNet)
 P2pNet is intended to be a relatively easy-to-use peer-to-peer networking layer the can "ride on top of" any number of network protocols. P2pNet presents a relatively limited pubsub-style messaging API to the app developer that does not change with the selected carrier protocol. Includes as subprojects `P2pNet.ActiveMq`, `P2pNet.Mqtt`, and `P2pNet.Redis` carrier shims.
+
+---
+### [**NotUnityEngine**](https://github.com/Apian-Framework/NotUnityEngine)
+A plugin replacing the `UnityEngine` library for non-Unity applications that want to use unity3D types and math functions.
+
+---
+### [**UniLog**](https://github.com/Apian-Framework/UniLog)
+A Unity-compatible - or not - per-subsystem based logging facility.
 
 ---
 ### **ApianCrypto**
 Provides an EVM-compatible crypto and blockchain API for Apian applications. Probably too verbose and trying way too hard to be generic in ways that might not really be helpful.
 
 ---
-### **UniLog**
-A Unity-compatible - or not - per-subsystem based logging facility.
-
----
-### **NotUnityEngine**
-A plugin replacing the `UnityEngine` library for non-Unity applications that want to use unity3D types and math functions.
-
----
 ### **ApianAppUtils**
 A simple library to support modal game code with stack-based transitions.
-
----
-### **BeamGameCode**
-Platform-independent code forming the core of an Apian-based free-running simulator test/demo/game.
-
----
-### **Beam.Cli**
-A console driver and frontend that together with BeamGameCode makes a cli version of the game suitable for testing or headless execution.
-
----
-### **Beam.Unity**
-A Unity 3D version of Beam. Network interoperable with Beam.Cli.
-
----
-### **Beam-Releases**
-Trying a different approach to the monorepo, multi-repo tangle for an app dependent on a bunch of still-in-development libraries.
 
 ---
 ### **MqttJS-Unity**
