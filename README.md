@@ -23,16 +23,17 @@ But if you really do just want to fetch and build the Apian Framework repositori
 ## What *are* all of these repositories?
 
 ---
-### Start-Here
+### [**Start-Here**](https://github.com/Apian-Framework/Start-Here)
 The repo you are looking at right now.
-
----
-### **P2pNet**
-P2pNet is intended to be a relatively easy-to-use peer-to-peer networking layer the can "ride on top of" any number of network protocols. P2pNet presents a relatively limited pubsub-style messaging API to the app developer that does not change with the selected carrier protocol. Includes as subprojects `P2pNet.ActiveMq`, `P2pNet.Mqtt`, and `P2pNet.Redis` carrier shims.
 
 ---
 ### **Apian.Net**
 This is the real guts of the Apian Framework, and defines the architectures and protocols required to allow peers to form game-state-management consensus groups that are not locked-in to any particular protocol or network layer.
+
+
+---
+### **P2pNet**
+P2pNet is intended to be a relatively easy-to-use peer-to-peer networking layer the can "ride on top of" any number of network protocols. P2pNet presents a relatively limited pubsub-style messaging API to the app developer that does not change with the selected carrier protocol. Includes as subprojects `P2pNet.ActiveMq`, `P2pNet.Mqtt`, and `P2pNet.Redis` carrier shims.
 
 ---
 ### **ApianCrypto**
