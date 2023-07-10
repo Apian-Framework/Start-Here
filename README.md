@@ -68,11 +68,11 @@ A simple library to support modal game code with stack-based transitions.
 
 ---
 ### **MqttJS-Unity**
-A Unity plugin providing Mqtt connectivity for browser-hosted WASM builds.
+A Unity plugin providing P2pNet Mqtt connectivity for browser-hosted WASM builds.
 
 ---
 ### **Libp2p-Unity**
-A Unity plugin providing libp2p connectivity for browser-hosted WASM builds.
+A Unity plugin providing P2pNet libp2p connectivity for browser-hosted WASM builds.
 
 ---
 ### **Apian-CI-Badges**
